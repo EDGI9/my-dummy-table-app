@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <a-row :gutter="18" type="flex" justify="end"> 
-        <a-col :span="12">
-          <!-- Toggle drawer -->
-          <a-button @click="toggleDrawer(true)">Add row</a-button>
-        </a-col>
+    <a-row :gutter="18" type="flex" justify="end">
+      <a-col :span="12">
+        <!-- Toggle drawer -->
+        <a-button @click="toggleDrawer(true)">Add row</a-button>
+      </a-col>
     </a-row>
     <a-row :gutter="16" type="flex" justify="center">
       <a-col :span="12">

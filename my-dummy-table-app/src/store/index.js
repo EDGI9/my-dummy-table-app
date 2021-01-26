@@ -7,26 +7,21 @@ export default new Vuex.Store({
   state: {
     tableColumns: [
       {
-        dataIndex: "name",
-        key: "name",
-        slots: { title: "customTitle" },
-        scopedSlots: { customRender: "name" },
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
       },
       {
-        title: "Age",
-        dataIndex: "age",
-        key: "age",
+        title: "Title",
+        dataIndex: "title",
+        key: "title",
+        scopedSlots: { customRender: "title" },
       },
       {
-        title: "Address",
-        dataIndex: "address",
-        key: "address",
-      },
-      {
-        title: "Tags",
-        key: "tags",
-        dataIndex: "tags",
-        scopedSlots: { customRender: "tags" },
+        title: "Status",
+        key: "status",
+        dataIndex: "status",
+        scopedSlots: { customRender: "status" },
       },
       {
         title: "Action",
@@ -36,25 +31,19 @@ export default new Vuex.Store({
     ],
     tableData: [
       {
-        key: "1",
-        name: "John Brown",
-        age: 32,
-        address: "New York No. 1 Lake Park",
-        tags: ["nice", "developer"],
+        id: 1,
+        title: "John Brown",
+        status: "nice",
       },
       {
-        key: "2",
-        name: "Jim Green",
-        age: 42,
-        address: "London No. 1 Lake Park",
-        tags: ["loser"],
+        id: 2,
+        title: "Jim Green",
+        status: "loser",
       },
       {
-        key: "3",
-        name: "Joe Black",
-        age: 32,
-        address: "Sidney No. 1 Lake Park",
-        tags: ["cool", "teacher"],
+        id: 3,
+        title: "Joe Black",
+        status: "teacher",
       },
     ],
   },
@@ -68,9 +57,10 @@ export default new Vuex.Store({
   },
   mutations: {
     addTableRow(state, payload) {
-      this.tableData.push(payload);
+      state.tableData.push(payload);
     },
     removeTableRow(state) {
+      console.log(state);
       /* Filter out the deleted row */
     },
   },

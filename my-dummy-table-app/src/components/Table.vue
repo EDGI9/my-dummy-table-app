@@ -1,15 +1,17 @@
 <template>
   <a-table :columns="tableColumns" :data-source="tableData">
-    <a slot="name" slot-scope="text">{{ text }}</a>
-    <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
-    <span slot="tags" slot-scope="tags">
-      <a-tag
-        v-for="tag in tags"
-        :key="tag"
-        :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
+    <a slot="name" slot-scope="title">{{ title }}</a>
+    <span slot="status" slot-scope="status">
+        <a-tag :key="status" color="green">
+            {{ status.toUpperCase() }}
+        </a-tag>
+      <!-- <a-tag
+        v-for="item in status"
+        :key="item"
+        :color="item === 'loser' ? 'volcano' : item.length > 5 ? 'geekblue' : 'green'"
       >
-        {{ tag.toUpperCase() }}
-      </a-tag>
+        {{ item.toUpperCase() }}
+      </a-tag> -->
     </span>
     <span slot="action" slot-scope="text, record">
       <a>Invite 一 {{ record.name }}</a>

@@ -9,22 +9,36 @@
       :visible="visible"
       @close="visible = false"
     >
-      <!-- Add basic form -->
+      <TableRowForm @on-submit="processFormData"/>
     </a-drawer>
   </div>
 </template>
 
 <script>
 import Table from "./components/Table.vue";
+import TableRowForm from "./components/TableRowForm.vue";
+import {mapActions} from "vuex"
 
 export default {
   name: "App",
   components: {
-    Table
+    Table,
+    TableRowForm
   },
   data() {
     return {
       visible: false,
+    }
+  },
+  methods: {
+    ...mapActions([
+      'addTableRow',
+      'addTableRow',
+    ]),
+    processFormData(formData) {
+      let body = {id: 0, ...formData}
+      this.addTableRow(body)
+      //console.log(body);
     }
   }
 };

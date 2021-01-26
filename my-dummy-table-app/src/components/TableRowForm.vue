@@ -27,11 +27,8 @@
                 ]"
                 placeholder="Please select a status"
               >
-                <a-select-option value="xiao">
-                  Xiaoxiao Fu
-                </a-select-option>
-                <a-select-option value="mao">
-                  Maomao Zhou
+                <a-select-option v-for="(status, index) of statuses" :key="index" :value="status">
+                  {{status}}
                 </a-select-option>
               </a-select>
             </a-form-item>
@@ -46,12 +43,16 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex"
 export default {
     name: "TableRowForm",
     data() {
         return {
             form:this.$form.createForm(this)
         }
+    },
+    computed: {
+      ...mapGetters(['statuses'])
     },
     methods: {
         handleSubmit(e) {

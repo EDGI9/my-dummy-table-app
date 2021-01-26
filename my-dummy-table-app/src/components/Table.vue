@@ -2,7 +2,7 @@
   <a-table :columns="tableColumns" :data-source="tableData">
     <a slot="name" slot-scope="title">{{ title }}</a>
     <span slot="status" slot-scope="status">
-        <a-tag :key="status" color="green">
+        <a-tag :key="status" :color="getStatusColor(status)">
             {{ status.toUpperCase() }}
         </a-tag>
     </span>
@@ -22,11 +22,28 @@ export default {
     computed: {
         ...mapGetters ([
             "tableColumns",
-            "tableData"
+            "tableData",
+            "statuses"
         ])
     },
     methods: {
-        ...mapActions(['removeTableRow'])
+        ...mapActions(['removeTableRow']),
+        getStatusColor(status) {
+            let color = ""
+            switch (status) {
+                case this.statuses.PUBLISHED:
+                    color = "green"
+                    break;
+                case this.statuses.PENDING:
+                    color = "pink"
+                    break;
+                case this.statuses.DRAFT:
+                default:
+                    color = "gray"
+                    break;
+            }
+            return color
+        }
     }
 }
 </script>

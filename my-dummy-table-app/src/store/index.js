@@ -33,19 +33,24 @@ export default new Vuex.Store({
       {
         id: 1,
         title: "John Brown",
-        status: "nice",
+        status: "published",
       },
       {
         id: 2,
         title: "Jim Green",
-        status: "loser",
+        status: "draft",
       },
       {
         id: 3,
         title: "Joe Black",
-        status: "teacher",
+        status: "pending",
       },
     ],
+    statues: {
+      DRAFT: "draft",
+      PUBLISHED: "published",
+      PENDING: "pending",
+    },
   },
   getters: {
     tableColumns: (state) => {
@@ -53,6 +58,9 @@ export default new Vuex.Store({
     },
     tableData: (state) => {
       return state.tableData;
+    },
+    statuses: (state) => {
+      return state.statues;
     },
   },
   mutations: {

@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    showDrawer: false,
     tableColumns: [
       {
         title: "ID",
@@ -51,8 +52,13 @@ export default new Vuex.Store({
       PUBLISHED: "published",
       PENDING: "pending",
     },
+    rowToEdit: {},
+    isEditMode: false,
   },
   getters: {
+    showDrawer: (state) => {
+      return state.showDrawer;
+    },
     tableColumns: (state) => {
       return state.tableColumns;
     },
@@ -62,16 +68,43 @@ export default new Vuex.Store({
     statuses: (state) => {
       return state.statues;
     },
+    rowToEdit: (state) => {
+      return state.rowToEdit;
+    },
+    isEditMode: (state) => {
+      return state.isEditMode;
+    },
   },
   mutations: {
+    toggleDrawer(state, booleanValue) {
+      state.showDrawer = booleanValue;
+    },
+    toggleEditMode(state, booleanValue) {
+      state.isEditMode = booleanValue;
+    },
     addTableRow(state, payload) {
       state.tableData.push(payload);
     },
     removeTableRow(state, rowIndex) {
       state.tableData.splice(rowIndex, 1);
     },
+    setTableRowToEdit(state, payload) {
+      state.rowToEdit = { ...state.rowToEdit, ...payload };
+    },
+    resetTableRowToEdit(state) {
+      state.rowToEdit = {};
+    },
+    updateTableRow(state, payload) {
+      state.tableData = payload;
+    },
   },
   actions: {
+    toggleDrawer({ state, commit }, booleanValue) {
+      commit("toggleDrawer", booleanValue);
+      if (state.isEditMode) {
+        commit("toggleEditMode", false);
+      }
+    },
     addTableRow(context, payload) {
       context.commit("addTableRow", payload);
       this._vm.$notification.success({
@@ -87,6 +120,18 @@ export default new Vuex.Store({
         description: "Row was removed from the table",
         placement: "topRight",
       });
+    },
+    setTableRowToEdit(context, payload) {
+      context.commit("setTableRowToEdit", payload);
+      context.commit("toggleDrawer", true);
+      context.commit("toggleEditMode", true);
+    },
+    resetTableRowToEdit(context, payload) {
+      context.commit("resetTableRowToEdit", payload);
+    },
+    updateTableRow(context, payload) {
+      context.commit("updateTableRow", payload);
+      context.commit("toggleEditMode", false);
     },
   },
   modules: {},

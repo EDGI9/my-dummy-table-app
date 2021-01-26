@@ -7,7 +7,7 @@
         </a-tag>
     </span>
     <span slot="action" slot-scope="text, record, index">
-      <a>Edit</a>
+      <a @click="setTableRowToEdit(record)">Edit</a>
       <a-divider type="vertical" />
       <a @click="removeTableRow(index)">Delete</a>
     </span>
@@ -27,7 +27,7 @@ export default {
         ])
     },
     methods: {
-        ...mapActions(['removeTableRow']),
+        ...mapActions(['removeTableRow', 'setTableRowToEdit']),
         getStatusColor(status) {
             let color = ""
             switch (status) {

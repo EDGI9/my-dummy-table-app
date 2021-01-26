@@ -3,7 +3,7 @@
     <a slot="name" slot-scope="title">{{ title }}</a>
     <span slot="status" slot-scope="status">
         <a-tag :key="status" :color="getStatusColor(status)">
-            {{ status.toUpperCase() }}
+            {{ status }}
         </a-tag>
     </span>
     <span slot="action" slot-scope="text, record, index">

@@ -66,9 +66,19 @@ export default new Vuex.Store({
   actions: {
     addTableRow(context, payload) {
       context.commit("addTableRow", payload);
+      this._vm.$notification.success({
+        message: `Success`,
+        description: "A new row was added to the table",
+        placement: "topRight",
+      });
     },
     removeTableRow(context, rowIndex) {
       context.commit("removeTableRow", rowIndex);
+      this._vm.$notification.success({
+        message: `Success`,
+        description: "Row was removed from the table",
+        placement: "topRight",
+      });
     },
   },
   modules: {},

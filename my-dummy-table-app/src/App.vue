@@ -35,6 +35,7 @@ export default {
       'addTableRow'
     ]),
     processFormData(formData) {
+      this.visible = false
       let body = {id: Math.floor(Math.random()*10000) , ...formData}
       this.addTableRow(body)
     }

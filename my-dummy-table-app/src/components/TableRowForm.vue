@@ -7,7 +7,7 @@
                 v-decorator="[
                   'title',
                   {
-                    rules: [{ required: true, message: 'Please enter user title' }],
+                    rules: [{ required: true, message: 'Please enter user title', min:3, max:20, pattern: /^[a-z0-9]+$/i }],
                   },
                 ]"
                 placeholder="Please enter title"

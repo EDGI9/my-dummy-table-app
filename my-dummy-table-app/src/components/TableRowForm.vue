@@ -76,6 +76,7 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
+          /* We emit the object with the correct object model that we want to add to the table */
           this.$emit("on-submit", values);
         }
       });

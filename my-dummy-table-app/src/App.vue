@@ -1,7 +1,18 @@
 <template>
   <div id="app">
-    <Table />
-    <a-button @click="toggleDrawer(true)">Open drawer</a-button>
+    <a-row :gutter="18" type="flex" justify="end"> 
+        <a-col :span="12">
+          <!-- Toggle drawer -->
+          <a-button @click="toggleDrawer(true)">Add row</a-button>
+        </a-col>
+    </a-row>
+    <a-row :gutter="16" type="flex" justify="center">
+      <a-col :span="12">
+        <!-- Table where we display our data -->
+        <Table />
+      </a-col>
+    </a-row>
+    <!-- Drawer where we keep our table forms-->
     <a-drawer
       title="Basic Drawer"
       placement="right"
@@ -9,7 +20,9 @@
       :visible="showDrawer"
       @close="toggleDrawer(false)"
     >
+      <!-- If in EditMode display edit form -->
       <TableRowEditForm v-if="isEditMode" @on-submit="processEditTableRow" />
+      <!-- else display normal form -->
       <TableRowForm v-else @on-submit="processAddTableRow" />
     </a-drawer>
   </div>
@@ -35,21 +48,26 @@ export default {
     ...mapActions([
       "addTableRow",
       "toggleDrawer",
-      "updateTableRow",
+      "updateTable",
       "resetTableRowToEdit"
     ]),
     processEditTableRow(payload) {
+      /* We create a copy of the array using the map method */
       const body = this.tableData.map(item => {
+        /* If the id of the table data is equal to the id of the edited object, we update that 
+        object with the values from the edited object using the spread method  */
         if (item.id === payload.id) {
           return { ...item, ...payload };
         }
+        /* Otherwise return unchanged object */
         return item;
       });
-      this.updateTableRow(body);
+      this.updateTable(body);
       this.resetTableRowToEdit();
       this.toggleDrawer(false);
     },
     processAddTableRow(formData) {
+      /* When adding a new row, we set a random number so that we have some sort of unique id */
       const body = { id: Math.floor(Math.random() * 10000), ...formData };
       this.addTableRow(body);
       this.toggleDrawer(false);

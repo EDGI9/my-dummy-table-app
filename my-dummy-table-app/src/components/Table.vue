@@ -5,26 +5,17 @@
         <a-tag :key="status" color="green">
             {{ status.toUpperCase() }}
         </a-tag>
-      <!-- <a-tag
-        v-for="item in status"
-        :key="item"
-        :color="item === 'loser' ? 'volcano' : item.length > 5 ? 'geekblue' : 'green'"
-      >
-        {{ item.toUpperCase() }}
-      </a-tag> -->
     </span>
-    <span slot="action" slot-scope="text, record">
-      <a>Invite 一 {{ record.name }}</a>
+    <span slot="action" slot-scope="text, record, index">
+      <a>Edit</a>
       <a-divider type="vertical" />
-      <a>Delete</a>
-      <a-divider type="vertical" />
-      <a class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
+      <a @click="removeTableRow(index)">Delete</a>
     </span>
   </a-table> 
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
     name: "Table",
@@ -33,6 +24,9 @@ export default {
             "tableColumns",
             "tableData"
         ])
+    },
+    methods: {
+        ...mapActions(['removeTableRow'])
     }
 }
 </script>

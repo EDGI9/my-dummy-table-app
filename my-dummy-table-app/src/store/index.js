@@ -59,17 +59,16 @@ export default new Vuex.Store({
     addTableRow(state, payload) {
       state.tableData.push(payload);
     },
-    removeTableRow(state) {
-      console.log(state);
-      /* Filter out the deleted row */
+    removeTableRow(state, rowIndex) {
+      state.tableData.splice(rowIndex, 1);
     },
   },
   actions: {
     addTableRow(context, payload) {
       context.commit("addTableRow", payload);
     },
-    removeTableRow() {
-      /* Filter out the deleted row */
+    removeTableRow(context, rowIndex) {
+      context.commit("removeTableRow", rowIndex);
     },
   },
   modules: {},

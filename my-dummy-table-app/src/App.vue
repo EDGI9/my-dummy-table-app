@@ -17,7 +17,7 @@
 <script>
 import Table from "./components/Table.vue";
 import TableRowForm from "./components/TableRowForm.vue";
-import {mapActions} from "vuex"
+import { mapActions } from "vuex"
 
 export default {
   name: "App",
@@ -32,13 +32,11 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addTableRow',
-      'addTableRow',
+      'addTableRow'
     ]),
     processFormData(formData) {
-      let body = {id: 0, ...formData}
+      let body = {id: Math.floor(Math.random()*10000) , ...formData}
       this.addTableRow(body)
-      //console.log(body);
     }
   }
 };
